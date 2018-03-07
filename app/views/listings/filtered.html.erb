@@ -25,7 +25,8 @@
               <td class="address-item"><%= listing.address %></td>
               <td class="latitude-item"><%= listing.latitude %></td>
               <td class="longitude-item"><%= listing.longitude %></td>
-              <td class="description-item"><%= listing.description %></td>
+							# <td class="description-item"><%#= listing.description %></td>
+							<td>description_with_highlight: <%= listing.highlight("#{@phrase}") %></td>
               <td class="descriminatory-item"><%= listing.discriminatory %></td>
             </tr>
           <% end %>

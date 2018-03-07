@@ -2,7 +2,8 @@
 <h3>Single listing </h3>
 <div class="container">
 		<% if @listing.discriminatory %>
-			<h3> this listing is DISCRIMINATORY! </h3>
+			<h4> this listing is DISCRIMINATORY, based on: </h4>
+		 	<p>@phrase.content</p>
 		<% end %>
 		<p>id: <%= @listing.id %></p>
 		<p>listed_at: <%= @listing.listed_at %></p>
@@ -10,6 +11,6 @@
 		<p>latitude: <%= @listing.latitude %></p>
 		<p>longitude: <%= @listing.longitude %></p>
 		<p>heading: <%= @listing.heading%></p>
-		<p>description: <%= @listing.description %></p>
+		<p>description: <%#= @listing.description %></p>
 		<p>discriminatory: <%= @listing.discriminatory %></p>
 </div>

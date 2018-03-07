@@ -50,6 +50,12 @@ class Listing < ApplicationRecord
 		Listing.discriminatory.count
 	end
 
+	def highlight(phrase)
+		# Based on ActionView::Helpers::TextHelper#highlight
+		highlighter = '<strong class="highlight red">' + "#{phrase}" + '</strong>'
+		self.description = self.description.gsub(phrase, highlighter).html_safe
+	end
+
 # default values for dates, if none are passed in
 # format for date arguments: 'yyyy-mm-dd', or any portion of a date starting with 'yyyy'
   def self.date_range(start_date_str='2000-2-1', end_date_str='')

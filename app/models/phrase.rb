@@ -25,6 +25,6 @@ class Phrase < ApplicationRecord
       PhraseListing.all.each do |phrase_listing|
           counts[phrase_listing.phrase.content] = PhraseListing.all.where(phrase_id: phrase_listing.phrase_id).count
       end
-  end
-
+	end
+	  
 end

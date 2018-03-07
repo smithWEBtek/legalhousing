@@ -14,7 +14,10 @@ class ListingsController < ApplicationController
   end
 
   def show
-    set_listing
+		set_listing
+		if @listing.discriminatory
+			@phrase = 'room'
+		end
     render_listing_formats
   end
 
