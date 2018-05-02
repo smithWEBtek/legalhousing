@@ -22,8 +22,11 @@ class Listing < ApplicationRecord
 		@filtered_listings
 	end
 
-  def check_phrase(phrase)
-    regex = phrase.strip.gsub(' ','\s+')
+	def check_phrase(phrase)
+		phrase = phrase.gsub(/\W/, '\\\\\0')
+
+		regex = phrase.strip.gsub(' ','\s+')
+		
     reg_obj = Regexp.new(/#{regex}/i)
     if reg_obj.match(self.description)
       true
@@ -52,8 +55,11 @@ class Listing < ApplicationRecord
 
 	def highlight(phrase)
 		# Based on ActionView::Helpers::TextHelper#highlight
-		highlighter = '<strong class="highlight red">' + "#{phrase}" + '</strong>'
-		self.description = self.description.gsub(phrase, highlighter).html_safe
+		# highlighter = '<strong class="highlight red">' + "#{phrase}" + '</strong>'
+		highlighter = '<strong class="highlight red">\\0</strong>'
+
+		# self.description = self.description.gsub(phrase, highlighter).html_safe
+		self.description = self.description.gsub(/#{phrase}/i, highlighter).html_safe
 	end
 
 # default values for dates, if none are passed in
@@ -76,15 +82,18 @@ class Listing < ApplicationRecord
   private
 
   # Returns an array of discriminory phrases found in the listing
-  def find_discriminatory_phrases
-    found_phrases = []
-    Phrase.all.each do |phrase|
-      if self.check_phrase(phrase.content)
-        found_phrases.append(phrase)
-      end
-    end
-    return found_phrases
-  end
+#   def find_discriminatory_phrases
+#     found_phrases = []
+#     Phrase.all.each do |phrase|
+#       if self.check_phrase(phrase.content)
+#         found_phrases.append(phrase)
+#       end
+# 		end
+		
+# binding.pry		
+
+#     return found_phrases
+#   end
 
   def check_discriminatory_and_set_flag
     found_phrases = find_discriminatory_phrases

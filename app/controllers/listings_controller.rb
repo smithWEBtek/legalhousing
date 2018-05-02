@@ -52,7 +52,7 @@ class ListingsController < ApplicationController
   end
 	
 	def filter
-		@phrase =  Phrase.find_by_id(params[:temp][:phrase_id].to_i).content
+		@phrase = Phrase.find_by_id(params[:temp][:phrase_id].to_i).content
 		@listings = Listing.get_filtered_listings(@phrase)
 		render :template => "listings/filtered"
 	end
